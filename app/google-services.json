@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "39258757082",
+    "firebase_url": "https://aasha-18476-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "aasha-18476",
+    "storage_bucket": "aasha-18476.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39258757082:android:2c441d2a3229b8dea812e3",
+        "android_client_info": {
+          "package_name": "com.example.aasha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39258757082-pid8k2j0rsmme6mkvpjb0noja2ccs6rh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aasha",
+            "certificate_hash": "8cfc1b1b97ba7ae92a431d57a9a1f61d5b612333"
+          }
+        },
+        {
+          "client_id": "39258757082-ato42b2qitibpujsaoq2sppm74iae70t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKIdB7nOmwBIGi3ORGyatRPjZeNYu48KU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39258757082-ato42b2qitibpujsaoq2sppm74iae70t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/signed_user_profile"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:tint="@android:color/white"
+        app:srcCompat="@drawable/ic_user_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/signed_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintStart_toEndOf="@+id/signed_user_profile"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Ronnie Bine" />
+
+    <ImageView
+        android:id="@+id/join_image_view"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        app:srcCompat="@drawable/ic_user_profile"
+        app:layout_constraintStart_toStartOf="@id/signed_user_name"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/joined_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/join_label"
+        android:textSize="12sp"
+        android:paddingHorizontal="4dp"
+        app:layout_constraintStart_toEndOf="@id/join_image_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Joined on" />
+
+    <TextView
+        android:id="@+id/singed_user_join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/joined_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="24 nov 21" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

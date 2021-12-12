@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Aasha</string>
+    <string name="app_description">Aasha is a learning prototype of mine where I have implemented
+        what I have learned about the cloud based chat system so far.
+        I hope you acknowledge it\'s basic structure.</string>
+    <string name="log_in_text">Already have an account?</string>
+
+    <string name="mute_chat">Mute notifications</string>
+    <string name="users">Connected users</string>
+    <string name="share">Share the app</string>
+    <string name="save_edits">Save edits</string>
+    <string name="sign_out">Sign out</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Channel -->
+    <string name="channel_name">Channel</string>
+    <string name="channel_description">This is a channel description</string>
+
+    <!-- Google -->
+    <!-- <string name="default_web_client_id">39258757082-pid8k2j0rsmme6mkvpjb0noja2ccs6rh.apps.googleusercontent.com</string> -->
+
+    <!-- facebook -->
+    <string name="facebook_app_id">3478727785687052</string>
+    <string name="fb_login_protocol_scheme">fb3478727785687052</string>
+
+    <string name="facebook">Sign in with Facebook</string>
+    <string name="connected_users">Connected Users</string>
+    <string name="thanking">A big thanks to each one of you!</string>
+    <string name="join_label">Joined on</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+</resources>
