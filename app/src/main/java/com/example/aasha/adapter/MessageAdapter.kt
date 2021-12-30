@@ -4,9 +4,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.setPadding
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aasha.R
@@ -19,8 +24,10 @@ import com.example.aasha.model.MessageDiff
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.progressindicator.LinearProgressIndicator
+import com.google.android.material.resources.MaterialResources.getDimensionPixelSize
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import kotlin.properties.Delegates
 
 private enum class EnumViewHolder {
     SENDER_MESSAGE_VIEW_HOLDER,
@@ -69,9 +76,8 @@ class MessageAdapter(
 
     override fun getItemViewType(position: Int): Int {
         val optionSnapshot = options.snapshots[position]
-        if (optionSnapshot.text != null) {
-            val userName = optionSnapshot.name
-            return if (userName != ANONYMOUS && optionSnapshot.userId == userId && userName != null) {
+        return if (optionSnapshot.text != null) {
+            if (optionSnapshot.userId == userId) {
                 viewHolder = EnumViewHolder.SENDER_MESSAGE_VIEW_HOLDER
                 VIEW_TYPE_SENDER_TEXT
             } else {
@@ -79,8 +85,7 @@ class MessageAdapter(
                 VIEW_TYPE_TEXT
             }
         } else {
-            val userName = optionSnapshot.name
-            return if (userName != ANONYMOUS && optionSnapshot.userId == userId && userName != null) {
+            if (optionSnapshot.userId == userId) {
                 viewHolder = EnumViewHolder.SENDER_IMAGE_VIEW_HOLDER
                 VIEW_TYPE_SENDER_IMAGE
             } else {
@@ -111,16 +116,21 @@ class MessageAdapter(
 
     inner class MessageViewHolder(private val binding: MessageBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(item: Message,
-                     isSameDate: Boolean,
-                     isSameUser: Boolean,
+             isSameDate: Boolean,
+             isSameUser: Boolean,
         ) {
-            binding.messageText.text = item.text
+            val text = item.text!!
+            if (text.length < 20) {
+                binding.messageLayout.orientation = LinearLayout.HORIZONTAL
+                binding.messageText.setPadding(20)
+            }
+            binding.messageText.text = text
             binding.messageTime.text = item.time
 
             if (isSameUser && isSameDate) {
                 binding.viewholderLayout.setPadding(0)
-                binding.messageLayout.setBackgroundResource(R.drawable.message_background)
                 binding.userImage.visibility = View.INVISIBLE
+                binding.messageLayout.setBackgroundResource(R.drawable.message_background)
             } else {
                 binding.viewholderLayout.setPadding(0, 16, 0, 0)
                 if (item.photoUrl != null) {
@@ -141,7 +151,12 @@ class MessageAdapter(
                      isSameDate: Boolean,
                      isSameUser: Boolean,
         ) {
-            binding.senderMessageText.text = item.text
+            val text = item.text!!
+            if (text.length < 20) {
+                binding.senderMessageLayout.orientation = LinearLayout.HORIZONTAL
+                binding.senderMessageText.setPadding(20)
+            }
+            binding.senderMessageText.text = text
             binding.senderMessageTime.text = item.time
 
             if (isSameUser && isSameDate) {
@@ -166,6 +181,7 @@ class MessageAdapter(
     inner class ImageMessageViewHolder(private val binding: ImgaeMessageBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(item: Message) {
             loadImageIntoView(binding.sendImage, item.imageUrl!!)
+            binding.imageMessageTime.text = item.time
             if (item.photoUrl != null) {
                 loadImageIntoView(binding.senderImage, item.photoUrl!!)
             } else {
@@ -177,6 +193,7 @@ class MessageAdapter(
     inner class SenderImageViewHolder(private val binding: SenderImageLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(item: Message) {
             loadImageIntoView(binding.senderImage, item.imageUrl!!)
+            binding.imageSenderMessageTime.text = item.time
             if (item.photoUrl != null) {
                 loadImageIntoView(binding.senderProfile, item.photoUrl!!)
             } else {

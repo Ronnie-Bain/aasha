@@ -26,7 +26,7 @@
         android:id="@+id/sender_message_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/round_message_blue_background"
@@ -37,8 +37,9 @@
             android:id="@+id/sender_message_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="250dp"
-            android:padding="10dp"
+            android:maxWidth="230dp"
+            android:paddingHorizontal="10dp"
+            android:paddingTop="10dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@android:color/white"
             tools:text="This is Ronnie Bine. Is it working?" />
@@ -50,7 +51,7 @@
             android:paddingEnd="16dp"
             android:paddingVertical="2dp"
             android:textSize="11sp"
-            android:layout_gravity="bottom"
+            android:layout_gravity="end|bottom"
             android:textColor="@color/gray"
             tools:text="15:46" />
 

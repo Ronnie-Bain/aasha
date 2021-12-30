@@ -182,48 +182,48 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun launchShareIntent() {
-            val app: ApplicationInfo = applicationContext.applicationInfo
-            val originalApk = app.publicSourceDir
-            try {
-                //Make new directory in new location
-                var tempFile: File = File(externalCacheDir.toString() + "/ExtractedApk")
-                //If directory doesn't exists create new
-                if (!tempFile.isDirectory) if (!tempFile.mkdirs()) return
-                //rename apk file to app name
-                tempFile = File(tempFile.path + "/" + getString(app.labelRes).replace(" ", "") + ".apk")
-                //If file doesn't exists create new
-                if (!tempFile.exists()) {
-                    if (!tempFile.createNewFile()) {
-                        return
-                    }
+        val app: ApplicationInfo = applicationContext.applicationInfo
+        val originalApk = app.publicSourceDir
+        try {
+            //Make new directory in new location
+            var tempFile: File = File(externalCacheDir.toString() + "/ExtractedApk")
+            //If directory doesn't exists create new
+            if (!tempFile.isDirectory) if (!tempFile.mkdirs()) return
+            //rename apk file to app name
+            tempFile = File(tempFile.path + "/" + getString(app.labelRes).replace(" ", "") + ".apk")
+            //If file doesn't exists create new
+            if (!tempFile.exists()) {
+                if (!tempFile.createNewFile()) {
+                    return
                 }
-                //Copy file to new location
-                val inp: InputStream = FileInputStream(originalApk)
-                val out: OutputStream = FileOutputStream(tempFile)
-                val buf = ByteArray(1024)
-                var len: Int
-                while (inp.read(buf).also { len = it } > 0) {
-                    out.write(buf, 0, len)
-                }
-                inp.close()
-                out.close()
-                //Open share dialog
-                val intent = Intent(Intent.ACTION_SEND)
-                //MIME type for apk, might not work in bluetooth share as it doesn't support apk MIME type
-
-                intent.type = "application/vnd.android.package-archive"
-                intent.putExtra(
-                    Intent.EXTRA_STREAM, FileProvider.getUriForFile(
-                        this, BuildConfig.APPLICATION_ID + ".provider", File(tempFile.path)
-                    )
-                )
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                startActivity(intent)
-            } catch (e: IOException) {
-                e.printStackTrace()
             }
+            //Copy file to new location
+            val inp: InputStream = FileInputStream(originalApk)
+            val out: OutputStream = FileOutputStream(tempFile)
+            val buf = ByteArray(1024)
+            var len: Int
+            while (inp.read(buf).also { len = it } > 0) {
+                out.write(buf, 0, len)
+            }
+            inp.close()
+            out.close()
+            //Open share dialog
+            val intent = Intent(Intent.ACTION_SEND)
+            //MIME type for apk, might not work in bluetooth share as it doesn't support apk MIME type
+
+            intent.type = "application/vnd.android.package-archive"
+            intent.putExtra(
+                Intent.EXTRA_STREAM, FileProvider.getUriForFile(
+                    this, BuildConfig.APPLICATION_ID + ".provider", File(tempFile.path)
+                )
+            )
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
     override fun onDialogPositiveClick(
@@ -352,7 +352,7 @@ class MainActivity : AppCompatActivity(),
                         .getReference(user!!.uid)
                         .child(key!!)
                         .child(uri.lastPathSegment!!)
-                    putImageInStorage(storageReference, uri,key)
+                    putImageInStorage(storageReference, uri, key)
                 }
             )
     }
@@ -391,7 +391,6 @@ class MainActivity : AppCompatActivity(),
     private fun goToConnUsersActivity() {
         val intent = Intent(this, ConnectedUsersActivity::class.java)
         startActivity(intent)
-        Log.w(TAG, "Launching to Connected users Activity")
     }
 
     companion object {
